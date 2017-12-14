@@ -32,7 +32,7 @@ export class AddShoppingItemPage {
 
   addItem(item: Item) {
     this.shoppingService.addItem(item).then(ref => {
-      console.log(ref.key);
+      this.navCtrl.setRoot('HomePage', { key: ref.key });
     });
   }
 
