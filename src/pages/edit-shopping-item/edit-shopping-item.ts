@@ -36,4 +36,11 @@ export class EditShoppingItemPage {
     });
   }
 
+  removeItem(item: Item) {
+    this.shoppingService.removeItem(item).then(() => {
+      this.toastService.show(`${item.name} deleted!`);
+      this.navCtrl.setRoot('HomePage');
+    })
+  }
+
 }
