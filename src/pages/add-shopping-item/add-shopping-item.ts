@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Item } from '../../models/item/item.model';
 import { ShoppingListService } from '../../services/shopping-list/shopping-list.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 /**
  * Generated class for the AddShoppingItemPage page.
@@ -22,8 +23,10 @@ export class AddShoppingItemPage {
     price: undefined
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private shoppingService: ShoppingListService) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private shoppingService: ShoppingListService,
+    private toastService: ToastService) {
   }
 
   ionViewDidLoad() {
@@ -32,6 +35,7 @@ export class AddShoppingItemPage {
 
   addItem(item: Item) {
     this.shoppingService.addItem(item).then(ref => {
+      this.toastService.show(`${item.name} added!`);
       this.navCtrl.setRoot('HomePage', { key: ref.key });
     });
   }
